@@ -1,8 +1,6 @@
 import React from 'react'
 
-// import {
-//     heading
-// } from './Navbar.module.css';
+import styles from './Navbar.module.css';
 
 function Navbar() {
     return (

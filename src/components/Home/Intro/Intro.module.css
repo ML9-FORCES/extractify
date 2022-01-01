@@ -1,0 +1,25 @@
+:root {
+  --ROYALBLUE: #0e153a;
+  --BLUE: #3d5af1;
+  --CYAN: #22d1ee;
+  --GREY: #e2f3f5;
+}
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.textlarge {
+  font-size: 6rem;
+  color: var(--ROYALBLUE);
+}
+.textmedium {
+  font-size: 4rem;
+}
+.textsmall {
+  font-size: 1.6rem;
+}
