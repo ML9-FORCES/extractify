@@ -1,13 +1,12 @@
 import React from 'react'
 
-import {
-    heading
-} from './About.module.css'
+import styles from './About.module.css'
+import aboutImage from '../../../images/about.jpg';
 
 function About() {
     return (
         <div>
-            <h1 className={heading}>About</h1>
+            <img className={styles.image} src={aboutImage} alt="About" />
         </div>
     )
 }

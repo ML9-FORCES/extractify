@@ -1,12 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
 
-:root {
-  --ROYALBLUE: "#0E153A";
-  --BLUE: "#3D5AF1";
-  --CYAN: "#22D1EE";
-  --GREY: "#E2F3F5";
-}
-
 * {
   margin: 0;
   padding: 0;
