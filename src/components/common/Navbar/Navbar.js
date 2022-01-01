@@ -5,7 +5,7 @@ import styles from './Navbar.module.css';
 function Navbar() {
     return (
         <div>
-            <h1 >Navbar</h1>
+            <h1 className={styles.heading}>Navbar</h1>
         </div>
     )
 }
