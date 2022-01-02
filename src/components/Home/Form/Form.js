@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 
 import styles from './Form.module.css'
+import FormUpload from './FormUpload';
 
 function Form() {
-    const [option, setOption] = useState("JPEG");
+    const [option, setOption] = useState("");
 
     const optionHandler = (opt) => {
         setOption(opt);
@@ -15,19 +16,23 @@ function Form() {
             <h1 className={styles.heading}>Select the type of file</h1>
             <form className={styles.form}>
                 <label className={styles.label} >
-                    <input type="radio" name="radio" onClick={() => { optionHandler("JPEG") }} />
+                    <input type="radio" name="radio" onClick={() => { optionHandler("jpeg") }} />
                     <span>JPEG</span>
                 </label>
                 <label className={styles.label} >
-                    <input type="radio" name="radio" onClick={() => { optionHandler("PNG") }} />
+                    <input type="radio" name="radio" onClick={() => { optionHandler("jpg") }} />
+                    <span>JPG</span>
+                </label>
+                <label className={styles.label} >
+                    <input type="radio" name="radio" onClick={() => { optionHandler("png") }} />
                     <span>PNG</span>
                 </label>
                 <label className={styles.label} >
-                    <input type="radio" name="radio" onClick={() => { optionHandler("PDF") }} />
+                    <input type="radio" name="radio" onClick={() => { optionHandler("pdf") }} />
                     <span>PDF</span>
                 </label>
             </form>
-            <input type="file" name="file" id="file" />
+            <FormUpload option={option} />
         </div>
     )
 }

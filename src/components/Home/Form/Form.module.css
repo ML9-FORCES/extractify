@@ -55,3 +55,7 @@
 .label span:hover {
   background-color: #d6d6e5;
 }
+
+input[type="file"] {
+  padding: 0.4rem;
+}
