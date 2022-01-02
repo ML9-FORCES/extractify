@@ -1,13 +1,11 @@
 import React from 'react'
 
-import {
-    heading
-} from './Form.module.css'
+import styles from './Form.module.css'
 
 function Form() {
     return (
-        <div>
-            <h1 className={heading}>Form</h1>
+        <div className={styles.container}>
+            <input type="file" name="file" id="file" />
         </div>
     )
 }
