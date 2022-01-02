@@ -4,8 +4,9 @@ import styles from './Footer.module.css'
 
 function Footer() {
     return (
-        <div>
-            <h1 >Footer</h1>
+        <div className={styles.container}>
+            <p>Copyright &copy; 2022</p>
+            <p>@ML9FORCES</p>
         </div>
     )
 }
