@@ -3,13 +3,15 @@ import styles from './Column.module.css'
 
 function Column(props) {
     const [values, setValues] = useState([])
+    const [linking_cfscore, setScores] = useState([])
 
     const findValues = () => {
         props.chunk.linking.forEach((link) => {
+            linking_cfscore.push(link[2])
             props.data.forEach((chunk) => {
                 for (let obj in chunk) {
                     if (chunk[obj].id === link[1])
-                        values.push(link)
+                        values.push(chunk[obj].text)
                 }
             })
         })
@@ -41,7 +43,15 @@ function Column(props) {
             </div> */}
             <div className={styles.box}>
                 <div className={styles.key}>Linking Confidence Score:</div>
-                <div className={styles.value}>{props.linking_cfscore}</div>
+                <div className={styles.value}>
+                    {
+                        linking_cfscore.map((score) =>
+                            <span>
+                                {score}
+                            </span>
+                        )
+                    }
+                </div>
             </div>
         </div>
     )
