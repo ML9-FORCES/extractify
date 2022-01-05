@@ -29,7 +29,6 @@ function Column(props) {
                         <span>
                             {value}
                         </span>
-                        ,
                     </>
                 )}</div>
             </div>

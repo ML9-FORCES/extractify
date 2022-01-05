@@ -1,18 +1,22 @@
 .container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 100%;
-  align-items: center;
 }
 
 .image {
-  height: 20rem;
+  height: 40rem;
 }
 
 .columns {
   display: flex;
   flex-direction: column;
   align-content: space-between;
-  justify-content: center;
+  overflow: auto;
+  padding: 5px;
+  max-height: 30rem;
+  width: 45%;
+  box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.295);
+  border-radius: 10px;
 }

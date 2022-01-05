@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import axios from 'axios'
-
+import Doc from '../../images/doc.png'
 import styles from './Display.module.css'
 import Column from '../../components/Display/Column'
 import Navbar from '../../components/common/Navbar/Navbar'
@@ -44,7 +44,7 @@ function Display() {
             </Helmet>
             <Navbar />
             <div className={styles.container}>
-                <img className={styles.image} src="" alt="" />
+                <img className={styles.image} src={Doc} alt="Doc" />
                 <div className={styles.columns}>
                     {
                         keys.map((chunk, key) =>
