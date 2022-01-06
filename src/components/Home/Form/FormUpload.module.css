@@ -7,12 +7,13 @@
   clear: both;
   margin: 0 auto;
   width: 100%;
-  max-width: 600px;
+  max-width: 100%;
 }
 .uploader label {
   float: left;
   clear: both;
-  width: 100%;
+  width: 80%;
+  max-width: 100%;
   padding: 2rem 1.5rem;
   text-align: center;
   background: #fff;
@@ -131,4 +132,10 @@
   background: #454cad;
   border-color: #454cad;
   cursor: pointer;
+}
+
+@media screen and max-width(500px) {
+  .uploader label{
+    width: 80%;
+  }
 }

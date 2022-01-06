@@ -63,3 +63,21 @@
 input[type="file"] {
   padding: 0.4rem;
 }
+
+@media screen and (max-width: 700px){
+  .container{
+    margin-top: 3vh;
+    width: 80vw;
+    align-items: center;
+  }
+  .form {
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 340px){
+  .container h1{
+    font-size: 1.7rem;
+  }
+}

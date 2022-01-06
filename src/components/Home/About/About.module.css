@@ -5,3 +5,20 @@
   right: 0;
   z-index: -1;
 }
+
+@media screen and (max-width: 900px) {
+  .image{
+    width: 55%;
+  }
+}
+@media screen and (max-width: 700px){
+  .image{
+    position: static;
+    margin-right: 40px;
+  }
+}
+@media screen and (max-width: 400px){
+  .image{
+    width: 90%;
+  }
+}
