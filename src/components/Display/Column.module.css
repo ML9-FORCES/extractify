@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem;
+  border: none;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.295);
+  border-radius: 10px;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem;
+  margin: 0.2rem;
+}
+
+.key {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.value {
+  padding: 0.4rem;
+  margin-left: 0.2rem;
+  border: 1px solid black;
+  border-radius: 10px;
+}
