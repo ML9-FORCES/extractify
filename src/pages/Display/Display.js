@@ -1,6 +1,6 @@
 import React, { useEffect, useState, createContext, useContext, useMemo } from 'react'
 import { Helmet } from 'react-helmet'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios'
 
 import styles from './Display.module.css'
@@ -15,6 +15,9 @@ export const CanvasContext = createContext(null);
 function Display() {
     // Navigation Hook
     const navigate = useNavigate();
+    const { state } = useLocation();
+    const { raw_data } = state;
+
 
     useEffect(() => {
         getKeysAndOthers();
@@ -39,41 +42,34 @@ function Display() {
     }
 
     const getKeysAndOthers = () => {
-        axios
-            .get('http://localhost:8000/output/')
-            .then((res) => {
-                data.push(res.data.form)
-                let tempArr = [];
-                let tempArr1 = [];
+        data.push(raw_data.form)
+        let tempArr = [];
+        let tempArr1 = [];
 
-                // Extracting keys 
-                data.forEach((chunk) => {
-                    for (let object in chunk) {
-                        if (chunk[object].label[0] === "key") {
-                            tempArr.push(chunk[object])
-                        }
-                        if (chunk[object].label[0] === "others") {
-                            tempArr1.push(chunk[object])
-                        }
-                    }
-                })
-                setKeys(tempArr)
-                setOthers(tempArr1)
+        // Extracting keys 
+        data.forEach((chunk) => {
+            for (let object in chunk) {
+                if (chunk[object].label[0] === "key") {
+                    tempArr.push(chunk[object])
+                }
+                if (chunk[object].label[0] === "others") {
+                    tempArr1.push(chunk[object])
+                }
+            }
+        })
+        setKeys(tempArr)
+        setOthers(tempArr1)
 
-            })
-            .catch((e) => {
-                console.log(e)
-            })
     }
 
     // Draw Keys
-    const drawKey = (params, context, chunk) => {
+    const drawKey = (params, chunk) => {
         const [first, second, third, fourth] = params;
 
-        context.beginPath();
-        context.strokeStyle = "red";
-        context.rect(first, second, third, fourth);
-        context.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "red";
+        ctx.rect(first, second, third - first, fourth - second);
+        ctx.stroke();
 
         chunk.linking.forEach((link) => {
             let tempID = link[1];
@@ -82,7 +78,8 @@ function Display() {
                 for (let object in chunk) {
                     if (chunk[object].id === tempID) {
                         let valueRectParams = chunk[object].box
-                        drawValues(context, valueRectParams);
+                        // valueRectParams.forEach((e) => e = e / 4)
+                        drawValues(valueRectParams);
                     }
                 }
             })
@@ -91,17 +88,21 @@ function Display() {
     }
 
     // Draw Values
-    const drawValues = (valueRectparams, context) => {
+    const drawValues = (valueRectparams) => {
         const [first, second, third, fourth] = valueRectparams;
 
-        context.beginPath();
-        context.rect(first, second, third, fourth);
-        context.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "green";
+        ctx.rect(first, second, third - first, fourth - second);
+        ctx.stroke();
 
     }
     const selectBoxHandler = (chunk) => {
+        console.log(chunk)
         let params = chunk.box;
+        // params.forEach((e) => e = e / 4)
         drawKey(params, chunk)
+
     }
 
 
@@ -111,6 +112,16 @@ function Display() {
                 <title>Display</title>
             </Helmet>
             <Navbar />
+            <div className={styles.instructions}>
+                <div className={styles.inst_wrapper}>
+                    <div className={styles.red}></div>
+                    <span className={styles.inst_text}>Key</span>
+                </div>
+                <div className={styles.inst_wrapper}>
+                    <div className={styles.green}></div>
+                    <span className={styles.inst_text}>Values</span>
+                </div>
+            </div>
             <CanvasContext.Provider value={value}>
                 {
                     selectedImageFile ?
@@ -127,7 +138,7 @@ function Display() {
                                             text={chunk.text}
                                             id={chunk.id}
                                             label_cfscore={chunk.label[1]}
-                                            onClick={() => selectBoxHandler(chunk.id)}
+                                            onClick={() => selectBoxHandler(chunk)}
                                         />
                                     )
                                 }

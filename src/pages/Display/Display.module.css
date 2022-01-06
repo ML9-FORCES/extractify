@@ -40,3 +40,26 @@
 .button:hover {
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.411);
 }
+
+.instructions {
+  padding: 2rem;
+}
+.red {
+  height: 1rem;
+  width: 1rem;
+  background-color: green;
+}
+.green {
+  height: 1rem;
+  width: 1rem;
+  background-color: red;
+}
+
+.inst_wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.inst_text {
+  display: inline-block;
+}

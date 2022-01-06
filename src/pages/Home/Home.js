@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Helmet } from 'react-helmet';
 
 import Navbar from '../../components/common/Navbar/Navbar';
@@ -7,10 +7,15 @@ import Intro from '../../components/Home/Intro/Intro';
 import About from '../../components/Home/About/About';
 import Form from '../../components/Home/Form/Form';
 
+
+import { ContextImage } from '../../App';
+
 import styles from './Home.module.css';
 
 function Home() {
     const [showIntro, setIntro] = useState(true);
+
+    const { setSelectedImageFile } = useContext(ContextImage)
 
     const IntroDisplayHandler = () => {
         setIntro(false);
@@ -18,6 +23,7 @@ function Home() {
 
     useEffect(() => {
         setTimeout(IntroDisplayHandler, 1000)
+        setSelectedImageFile(null)
     }, [])
 
     return (

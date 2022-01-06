@@ -21,10 +21,10 @@ function Column(props) {
     findValues()
 
     return (
-        <div className={styles.container}>
+        <div onClick={props.onClick} className={styles.container}>
             <div className={styles.box}>
                 <div className={styles.key}>{props.text}</div>
-                <div className={styles.value}>{values.map((value) =>
+                <div className={styles.value}>{values.map((value, key) =>
                     <>
                         <span>
                             {value}
@@ -44,7 +44,7 @@ function Column(props) {
                 <div className={styles.key}>Linking Confidence Score:</div>
                 <div className={styles.value}>
                     {
-                        linking_cfscore.map((score) =>
+                        linking_cfscore.map((score, key) =>
                             <span>
                                 {score}
                             </span>

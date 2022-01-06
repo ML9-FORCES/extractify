@@ -1,20 +1,25 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import FormUploader from './FormUploader';
 import styles from './FormUpload.module.css'
 
 import { ContextImage } from '../../../App';
+import ProgressPage from '../../../pages/ProgressPage/ProgressPage';
 
 function FormUpload(props) {
     let url = '';
     const navigate = useNavigate();
     const { selectedImageFile, setSelectedImageFile } = useContext(ContextImage)
     const [selectedJSONFile, setSelectedJSONFile] = useState(null);
+    const [showProgress, setProgress] = useState(false)
+
+    useEffect(() => {
+
+    }, [])
 
 
     const submitForm = (e) => {
-
         e.preventDefault()
         const formData = new FormData();
         formData.append("pdf_name", selectedImageFile);
@@ -32,32 +37,34 @@ function FormUpload(props) {
 
         // upload the JSON file
         url = 'http://127.0.0.1:5000/api';
-        const options = {
-            headers: { 'Content-Type': 'application/json' }
-        };
-
         const reader = new FileReader()
         reader.onload = async (e) => {
-            console.log(e.target.result)
-            reader.readAsText(selectedJSONFile)
-            JSON.parse(reader)
-        };
+            let data = e.target.result
+            var config = {
+                method: 'post',
+                url: 'http://127.0.0.1:5000/api',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: data
+            };
 
-        axios
-            .post(url, reader, options)
-            .then((res) => {
-                navigate('/display')
-            })
-            .catch((err) => alert("File Upload Error"));
-
+            axios(config)
+                .then(function (response) {
+                    navigate('/display', { state: { raw_data: response.data } })
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+        reader.readAsText(selectedJSONFile)
     }
 
     return (
         <form id={styles.fileUploadForm} className={`${styles.uploader} ${props.option ? '' : styles.disable}`}>
-            {/* <input
-                value={selectedFile}
-                onChange={(e) => setSelectedFile(e.target.files[0])} id='fileUpload' type="file" name="fileUpload" accept={`.${props.option}`} disabled={props.option ? false : true} /> */}
-
+            {
+                showProgress ? <ProgressPage /> : ''
+            }
             {/* Input Image */}
             {
                 selectedImageFile

@@ -8,8 +8,13 @@
   border: none;
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.295);
   border-radius: 10px;
+  cursor: pointer;
 }
 
+.focus {
+  border: 1px solid #005792;
+  box-shadow: 0 0 1px 5px rgba(0, 0, 0, 0.295);
+}
 .box {
   display: flex;
   flex-direction: row;
