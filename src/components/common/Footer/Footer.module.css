@@ -16,3 +16,9 @@
 p {
   color: white;
 }
+
+@media screen and (max-width: 430px) {
+  p{
+    margin-right: 12vw;
+  }
+}
