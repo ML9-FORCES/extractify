@@ -4,9 +4,10 @@ function FormUploader({ id, name, accept, disabled, onFileSelectError, onFileSel
     const handleFileInput = (e) => {
         // handle validations
         const file = e.target.files[0];
-        if (file.size > 10000000)
-            onFileSelectError({ error: "File size cannot exceed more than 10MB" });
-        else onFileSelectSuccess(file);
+        // if (file.size > 10000000)
+        //     onFileSelectError({ error: "File size cannot exceed more than 10MB" });
+        // else 
+        onFileSelectSuccess(file);
     }
     return (
         <div className="file-uploader">

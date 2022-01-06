@@ -17,7 +17,7 @@ function Home() {
     }
 
     useEffect(() => {
-        setTimeout(IntroDisplayHandler, 4000)
+        setTimeout(IntroDisplayHandler, 1000)
     }, [])
 
     return (
