@@ -4,9 +4,11 @@
   align-items: center;
   padding: 4rem;
   flex-direction: column;
-  /* position: fixed;
+  position: fixed;
   top: 0;
-  left: 0; */
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: white;
   height: 31rem;
   overflow: auto;

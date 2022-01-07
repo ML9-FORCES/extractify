@@ -62,4 +62,7 @@
 
 .inst_text {
   display: inline-block;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 0px 10px;
 }
