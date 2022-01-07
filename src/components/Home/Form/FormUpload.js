@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import FormUploader from './FormUploader';
@@ -14,17 +14,13 @@ function FormUpload(props) {
     const [selectedJSONFile, setSelectedJSONFile] = useState(null);
     const [showProgress, setProgress] = useState(false)
 
-    useEffect(() => {
-
-    }, [])
-
-
     const submitForm = (e) => {
         e.preventDefault()
+
+        // Change pdf to image format
         const formData = new FormData();
         formData.append("pdf_name", selectedImageFile);
 
-        // Change pdf to image format
         if (props.option === "pdf") {
             url = 'http://127.0.0.1:5000/pdf_converter/'
             axios
@@ -51,7 +47,17 @@ function FormUpload(props) {
 
             axios(config)
                 .then(function (response) {
-                    navigate('/display', { state: { raw_data: response.data } })
+                    // Change the uploaded to base64
+                    const imgReader = new FileReader();
+                    imgReader.onload = async (e) => {
+                        let img;
+                        img = e.target.result;
+                        navigate('/display', { state: { raw_data: response.data, img: img } })
+                    }
+
+                    if (selectedImageFile) {
+                        imgReader.readAsDataURL(selectedImageFile)
+                    }
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -65,6 +71,7 @@ function FormUpload(props) {
             {
                 showProgress ? <ProgressPage /> : ''
             }
+
             {/* Input Image */}
             {
                 selectedImageFile

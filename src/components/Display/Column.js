@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import styles from './Column.module.css'
 
 function Column(props) {
@@ -21,39 +21,35 @@ function Column(props) {
     findValues()
 
     return (
-        <div onClick={props.onClick} className={styles.container}>
+        <div onClick={props.onToggle} className={`${styles.container} ${props.isFocused ? styles.focus : styles.nofocus}`}>
             <div className={styles.box}>
                 <div className={styles.key}>{props.text}</div>
-                <div className={styles.value}>{values.map((value, key) =>
-                    <>
-                        <span>
-                            {value}
-                        </span>
-                    </>
-                )}</div>
+                <div className={styles.value}> <List list={values} /></div>
             </div>
             <div className={styles.box}>
                 <div className={styles.key}>Label Confidence Score:</div>
                 <div className={styles.value}>{props.label_cfscore}</div>
             </div>
-            {/* <div className={styles.box}>
-                <div className={styles.key}>Linking:</div>
-                <div className={styles.value}>From: {props.link_from} To: {props.link_to}</div>
-            </div> */}
             <div className={styles.box}>
                 <div className={styles.key}>Linking Confidence Score:</div>
                 <div className={styles.value}>
-                    {
-                        linking_cfscore.map((score, key) =>
-                            <span>
-                                {score}
-                            </span>
-                        )
-                    }
+                    <List list={linking_cfscore} />
                 </div>
             </div>
         </div>
     )
 }
 
-export default Column
+const List = memo((props) => (
+    <>
+        {
+            props.list.map((score, key) =>
+                <span key={key}>
+                    {score}
+                </span>
+            )
+        }
+    </>
+))
+
+export default memo(Column)

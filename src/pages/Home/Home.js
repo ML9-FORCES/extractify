@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import Navbar from '../../components/common/Navbar/Navbar';
 import Footer from '../../components/common/Footer/Footer';
@@ -27,24 +27,26 @@ function Home() {
     }, [])
 
     return (
-        <div>
-            <Helmet>
-                <title>Home | Extractify</title>
-            </Helmet>
-            {
-                showIntro ? <Intro />
-                    :
-                    <>
-                        <Navbar />
-                        <div className={styles.container}>
-                            <Form />
-                            <About />
-                        </div>
-                        <Footer />
-                    </>
-            }
+        <HelmetProvider>
+            <div>
+                <Helmet>
+                    <title>Home | Extractify</title>
+                </Helmet>
+                {
+                    showIntro ? <Intro />
+                        :
+                        <>
+                            <Navbar />
+                            <div className={styles.container}>
+                                <Form />
+                                <About />
+                            </div>
+                            <Footer />
+                        </>
+                }
 
-        </div>
+            </div>
+        </HelmetProvider>
     )
 }
 

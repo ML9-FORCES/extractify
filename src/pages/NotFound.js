@@ -1,14 +1,14 @@
 import React from 'react'
-import { Helmet } from 'react-helmet'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 function NotFound() {
     return (
-        <div>
+        <HelmetProvider>
             <Helmet>
                 <title>Not Found</title>
             </Helmet>
             Not Found
-        </div>
+        </HelmetProvider>
     )
 }
 

@@ -1,14 +1,11 @@
-import React, { useEffect, useState, createContext, useContext, useMemo } from 'react'
-import { Helmet } from 'react-helmet'
+import React, { useEffect, useState, createContext, useMemo, memo } from 'react'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios'
 
 import styles from './Display.module.css'
-import Doc from '../../images/doc.png'
 import Column from '../../components/Display/Column'
 import Navbar from '../../components/common/Navbar/Navbar'
 import Canvas from '../../components/Display/Canvas'
-import { ContextImage } from '../../App'
 
 export const CanvasContext = createContext(null);
 
@@ -16,7 +13,7 @@ function Display() {
     // Navigation Hook
     const navigate = useNavigate();
     const { state } = useLocation();
-    const { raw_data } = state;
+    const { raw_data, img } = state;
 
 
     useEffect(() => {
@@ -29,13 +26,9 @@ function Display() {
         () => ({ ctx, setCtx }),
         [ctx]
     );
-    // Keys, values,data
-    const { selectedImageFile, setSelectedImageFile } = useContext(ContextImage);
     const [keys, setKeys] = useState([])
     const [others, setOthers] = useState([])
     const [data, setData] = useState([])
-
-    setSelectedImageFile(Doc)
 
     const buttonHandler = () => {
         navigate('/');
@@ -78,12 +71,10 @@ function Display() {
                 for (let object in chunk) {
                     if (chunk[object].id === tempID) {
                         let valueRectParams = chunk[object].box
-                        // valueRectParams.forEach((e) => e = e / 4)
                         drawValues(valueRectParams);
                     }
                 }
             })
-
         })
     }
 
@@ -95,19 +86,31 @@ function Display() {
         ctx.strokeStyle = "green";
         ctx.rect(first, second, third - first, fourth - second);
         ctx.stroke();
+    }
+
+    const [isFocused, setFocus] = useState('')
+
+    const clearCanvas = (chunk, key) => {
+        console.log('clear canvas')
+        const image = new Image();
+        image.src = img;
+        image.onload = () => {
+            console.log('draw image')
+            ctx.drawImage(image, 0, 0, 800, 1000);
+            selectBoxHandler(chunk, key);
+        };
 
     }
-    const selectBoxHandler = (chunk) => {
-        console.log(chunk)
+    const selectBoxHandler = (chunk, key) => {
+        console.log('selectbox')
         let params = chunk.box;
-        // params.forEach((e) => e = e / 4)
+        setFocus(chunk.id)
         drawKey(params, chunk)
-
     }
 
 
     return (
-        <>
+        <HelmetProvider>
             <Helmet>
                 <title>Display</title>
             </Helmet>
@@ -124,34 +127,35 @@ function Display() {
             </div>
             <CanvasContext.Provider value={value}>
                 {
-                    selectedImageFile ?
+                    img ?
                         <div className={styles.container}>
-                            <Canvas keys={keys} data={data} imgPath={selectedImageFile} width={400} height={600} />
-                            {/* <img className={styles.image} src={selectedImageFile} alt="Doc" /> */}
+                            <Canvas imgPath={img} width={400} height={600} />
                             <div className={styles.columns}>
                                 {
                                     keys.map((chunk, key) =>
                                         <Column
-                                            data={data}
                                             key={key}
+                                            data={data}
                                             chunk={chunk}
                                             text={chunk.text}
                                             id={chunk.id}
                                             label_cfscore={chunk.label[1]}
-                                            onClick={() => selectBoxHandler(chunk)}
+                                            isFocused={isFocused === chunk.id}
+                                            onToggle={() => clearCanvas(chunk, key)}
                                         />
                                     )
                                 }
                                 {
                                     others.map((chunk, key) =>
                                         <Column
-                                            data={data}
                                             key={key}
+                                            data={data}
                                             chunk={chunk}
                                             text={chunk.text}
                                             id={chunk.id}
                                             label_cfscore={chunk.label[1]}
-                                            onClick={() => selectBoxHandler(chunk.id)}
+                                            isFocused={isFocused === chunk.id}
+                                            onToggle={() => clearCanvas(chunk, key)}
                                         />
                                     )
                                 }
@@ -164,8 +168,8 @@ function Display() {
                         </>
                 }
             </CanvasContext.Provider>
-        </>
+        </HelmetProvider>
     )
 }
 
-export default Display
+export default memo(Display)
