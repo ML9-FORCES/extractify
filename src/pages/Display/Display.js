@@ -91,18 +91,15 @@ function Display() {
     const [isFocused, setFocus] = useState('')
 
     const clearCanvas = (chunk, key) => {
-        console.log('clear canvas')
         const image = new Image();
         image.src = img;
         image.onload = () => {
-            console.log('draw image')
             ctx.drawImage(image, 0, 0, 800, 1000);
             selectBoxHandler(chunk, key);
         };
 
     }
     const selectBoxHandler = (chunk, key) => {
-        console.log('selectbox')
         let params = chunk.box;
         setFocus(chunk.id)
         drawKey(params, chunk)
@@ -130,6 +127,7 @@ function Display() {
                     img ?
                         <div className={styles.container}>
                             <Canvas imgPath={img} width={400} height={600} />
+
                             <div className={styles.columns}>
                                 {
                                     keys.map((chunk, key) =>

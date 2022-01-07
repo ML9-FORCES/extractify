@@ -17,7 +17,6 @@ function Column(props) {
         })
     }
 
-
     findValues()
 
     return (

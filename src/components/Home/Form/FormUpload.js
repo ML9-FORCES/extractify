@@ -17,53 +17,93 @@ function FormUpload(props) {
     const submitForm = (e) => {
         e.preventDefault()
 
-        // Change pdf to image format
-        const formData = new FormData();
-        formData.append("pdf_name", selectedImageFile);
 
+        // If it is in PDF format
+        // Upload the PDF for conversion
         if (props.option === "pdf") {
-            url = 'http://127.0.0.1:5000/pdf_converter/'
-            axios
-                .post(url, formData)
-                .then((res) => {
-                    alert("File Upload success");
-                })
-                .catch((err) => alert("File Upload Error"));
-        }
 
-        // upload the JSON file
-        url = 'http://127.0.0.1:5000/api';
-        const reader = new FileReader()
-        reader.onload = async (e) => {
-            let data = e.target.result
+            // Change pdf to image format
+            const formData = new FormData();
+            formData.append("pdf", selectedImageFile);
+
             var config = {
                 method: 'post',
-                url: 'http://127.0.0.1:5000/api',
+                url: 'http://127.0.0.1:5000/pdf_converter',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/pdf'
                 },
-                data: data
+                data: formData
             };
-
             axios(config)
-                .then(function (response) {
-                    // Change the uploaded to base64
-                    const imgReader = new FileReader();
-                    imgReader.onload = async (e) => {
-                        let img;
-                        img = e.target.result;
-                        navigate('/display', { state: { raw_data: response.data, img: img } })
-                    }
+                .then((res) => {
 
-                    if (selectedImageFile) {
-                        imgReader.readAsDataURL(selectedImageFile)
+                    // Base 64 encoded string
+                    let imag = `data:image/jpg;base64,${res.data.status}`
+                    console.log(imag)
+                    // upload the JSON file
+                    url = 'http://127.0.0.1:5000/api';
+                    const reader = new FileReader()
+                    reader.onload = async (e) => {
+                        let data = e.target.result
+                        var config = {
+                            method: 'post',
+                            url: 'http://127.0.0.1:5000/api',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            data: data
+                        };
+
+                        axios(config)
+                            .then(function (response) {
+                                navigate('/display', { state: { raw_data: response.data, img: imag } })
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
                     }
+                    reader.readAsText(selectedJSONFile)
                 })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                .catch((err) => alert(err));
         }
-        reader.readAsText(selectedJSONFile)
+
+        // If it is in Image Format
+        else {
+
+            // upload the JSON file
+            url = 'http://127.0.0.1:5000/api';
+            const reader = new FileReader()
+            reader.onload = async (e) => {
+                let data = e.target.result
+                var config = {
+                    method: 'post',
+                    url: 'http://127.0.0.1:5000/api',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: data
+                };
+
+                axios(config)
+                    .then(function (response) {
+                        // Change the uploaded to base64
+                        const imgReader = new FileReader();
+                        imgReader.onload = async (e) => {
+                            let img;
+                            img = e.target.result;
+                            navigate('/display', { state: { raw_data: response.data, img: img } })
+                        }
+
+                        if (selectedImageFile) {
+                            imgReader.readAsDataURL(selectedImageFile)
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+            reader.readAsText(selectedJSONFile)
+        }
     }
 
     return (
