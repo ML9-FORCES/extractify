@@ -4,9 +4,11 @@
   align-items: center;
   padding: 4rem;
   flex-direction: column;
-  /* position: fixed;
+  position: fixed;
   top: 0;
-  left: 0; */
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: white;
   height: 31rem;
   overflow: auto;
@@ -19,13 +21,10 @@
   align-items: center;
   width: 30%;
   margin: 20px;
-  /* position: fixed;
-  top: 0;
-  left: 0; */
 }
 .image {
   width: 10rem;
-  animation: scale 3s infinite;
+  animation: scale 3s ease-in-out infinite;
 }
 
 @keyframes scale {

@@ -11,7 +11,7 @@
 
 .focus {
   border: 1px solid #005792;
-  box-shadow: 0 0 1px 5px rgba(0, 0, 0, 0.295);
+  box-shadow: 0 0 0px 4px #00589283;
 }
 
 .nofocus {
