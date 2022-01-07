@@ -8,8 +8,17 @@
   align-items: center;
   justify-content: center;
   background-color: #00204a;
+  margin-bottom: 0;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 p {
   color: white;
+}
+
+@media screen and (max-width: 430px) {
+  p{
+    margin-right: 12vw;
+  }
 }
