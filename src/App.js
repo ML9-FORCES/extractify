@@ -23,6 +23,7 @@ function App() {
         <Route path="/display" element={<ContextImage.Provider value={value}><Display /></ContextImage.Provider>} />
       </Routes>
     </BrowserRouter>
+
   );
 }
 

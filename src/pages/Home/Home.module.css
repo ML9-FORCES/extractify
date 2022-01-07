@@ -1,6 +1,6 @@
-html, body{
-  overflow-x: hidden;
-  max-width: 100%;
+html,
+body {
+  box-sizing: border-box;
 }
 .container {
   display: flex;
@@ -9,7 +9,7 @@ html, body{
 }
 
 @media screen and (max-width: 700px) {
-  .container{
+  .container {
     text-align: center;
     flex-direction: column-reverse;
   }
