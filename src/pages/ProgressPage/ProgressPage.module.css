@@ -1,9 +1,39 @@
 .container {
   display: flex;
-  position: fixed;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+  flex-direction: column;
+  /* position: fixed;
   top: 0;
-  left: 0;
+  left: 0; */
   background-color: white;
-  height: 100vh;
-  width: 100vw;
+  height: 31rem;
+  overflow: auto;
+  width: 95%;
+}
+.StatusContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  margin: 20px;
+  /* position: fixed;
+  top: 0;
+  left: 0; */
+}
+.image {
+  width: 10rem;
+  animation: scale 3s infinite;
+}
+
+@keyframes scale {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }

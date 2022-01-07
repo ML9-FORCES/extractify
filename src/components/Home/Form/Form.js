@@ -13,7 +13,7 @@ function Form() {
     console.log(option)
     return (
         <div className={styles.container}>
-            <h1 className={styles.heading}>Select the type of file</h1>
+            <h1 className={styles.heading}>Choose file type:</h1>
             <form className={styles.form}>
                 <label className={styles.label} >
                     <input type="radio" name="radio" onClick={() => { optionHandler("jpeg") }} />

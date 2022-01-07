@@ -1,23 +1,30 @@
-import React, { useState, memo } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import styles from './Column.module.css'
 
 function Column(props) {
     const [values, setValues] = useState([])
     const [linking_cfscore, setScores] = useState([])
+    let tempVals = [];
+    let tempLinks = [];
 
-    const findValues = () => {
-        props.chunk.linking.forEach((link) => {
-            linking_cfscore.push(link[2])
-            props.data.forEach((chunk) => {
+    // console.log('column')
+    const getValues = () => {
+        props.chunk.linking.forEach((link, key) => {
+            console.log(key)
+            tempLinks.push(link[2])
+            props.data.forEach((chunk, key) => {
                 for (let obj in chunk) {
                     if (chunk[obj].id === link[1])
-                        values.push(chunk[obj].text)
+                        tempVals.push(chunk[obj].text)
                 }
             })
         })
+        setValues(tempVals)
+        setScores(tempLinks)
     }
-
-    findValues()
+    useEffect(() => {
+        getValues()
+    }, [])
 
     return (
         <div onClick={props.onToggle} className={`${styles.container} ${props.isFocused ? styles.focus : styles.nofocus}`}>
@@ -42,10 +49,15 @@ function Column(props) {
 const List = memo((props) => (
     <>
         {
-            props.list.map((score, key) =>
-                <span key={key}>
-                    {score}
-                </span>
+            props.list.map((score, key) => {
+
+                {/* console.log('list') */ }
+                return (
+                    <span key={key}>
+                        {score}
+                    </span>
+                )
+            }
             )
         }
     </>

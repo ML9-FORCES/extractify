@@ -28,24 +28,21 @@ function Home() {
 
     return (
         <HelmetProvider>
-            <div>
-                <Helmet>
-                    <title>Home | Extractify</title>
-                </Helmet>
-                {
-                    showIntro ? <Intro />
-                        :
-                        <>
-                            <Navbar />
-                            <div className={styles.container}>
-                                <Form />
-                                <About />
-                            </div>
-                            <Footer />
-                        </>
-                }
-
-            </div>
+            <Helmet>
+                <title>Home | Extractify</title>
+            </Helmet>
+            {
+                showIntro ? <Intro />
+                    :
+                    <>
+                        <Navbar />
+                        <div className={styles.container}>
+                            <Form />
+                            <About />
+                        </div>
+                        <Footer />
+                    </>
+            }
         </HelmetProvider>
     )
 }

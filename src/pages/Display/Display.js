@@ -45,16 +45,14 @@ function Display() {
                 if (chunk[object].label[0] === "key") {
                     tempArr.push(chunk[object])
                 }
-                if (chunk[object].label[0] === "others") {
+                if (chunk[object].label[0] === "other") {
                     tempArr1.push(chunk[object])
                 }
             }
         })
         setKeys(tempArr)
         setOthers(tempArr1)
-
     }
-
     // Draw Keys
     const drawKey = (params, chunk) => {
         const [first, second, third, fourth] = params;
@@ -130,17 +128,21 @@ function Display() {
 
                             <div className={styles.columns}>
                                 {
-                                    keys.map((chunk, key) =>
-                                        <Column
-                                            key={key}
-                                            data={data}
-                                            chunk={chunk}
-                                            text={chunk.text}
-                                            id={chunk.id}
-                                            label_cfscore={chunk.label[1]}
-                                            isFocused={isFocused === chunk.id}
-                                            onToggle={() => clearCanvas(chunk, key)}
-                                        />
+                                    keys.map((chunk, key) => {
+                                        console.log(chunk)
+                                        return (
+                                            <Column
+                                                key={key}
+                                                data={data}
+                                                chunk={chunk}
+                                                text={chunk.text}
+                                                id={chunk.id}
+                                                label_cfscore={chunk.label[1]}
+                                                isFocused={isFocused === chunk.id}
+                                                onToggle={() => clearCanvas(chunk, key)}
+                                            />
+                                        )
+                                    }
                                     )
                                 }
                                 {

@@ -14,9 +14,10 @@ function FormUpload(props) {
     const [selectedJSONFile, setSelectedJSONFile] = useState(null);
     const [showProgress, setProgress] = useState(false)
 
+
     const submitForm = (e) => {
         e.preventDefault()
-
+        setProgress(true)
 
         // If it is in PDF format
         // Upload the PDF for conversion

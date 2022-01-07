@@ -1,6 +1,9 @@
 .container {
   display: flex;
   flex-direction: column;
+  margin-top: 10vh;
+  min-width: 30vw;
+  margin-bottom: 10vh;
 }
 
 .heading {
@@ -13,6 +16,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  margin: 20px 0 40px;
 }
 
 .label {
@@ -58,4 +62,22 @@
 
 input[type="file"] {
   padding: 0.4rem;
+}
+
+@media screen and (max-width: 700px){
+  .container{
+    margin-top: 3vh;
+    width: 80vw;
+    align-items: center;
+  }
+  .form {
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 340px){
+  .container h1{
+    font-size: 1.7rem;
+  }
 }
