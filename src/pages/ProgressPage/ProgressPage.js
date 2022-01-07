@@ -35,7 +35,7 @@ function ProgressPage() {
                 }
                 return newValue
             })
-        }, 2000)
+        }, 2600)
 
         let i = 0;
         const imageInterval = setInterval(() => {
@@ -45,7 +45,7 @@ function ProgressPage() {
                 return 1
             }
             setStep(steps[i], setImage(images[i]))
-        }, 3500)
+        }, 8000)
     }, []);
 
     return (

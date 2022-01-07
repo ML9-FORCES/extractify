@@ -112,11 +112,11 @@ function Display() {
             <Navbar />
             <div className={styles.instructions}>
                 <div className={styles.inst_wrapper}>
-                    <div className={styles.red}></div>
+                    <div className={styles.green}></div>
                     <span className={styles.inst_text}>Key</span>
                 </div>
                 <div className={styles.inst_wrapper}>
-                    <div className={styles.green}></div>
+                    <div className={styles.red}></div>
                     <span className={styles.inst_text}>Values</span>
                 </div>
             </div>
