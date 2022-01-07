@@ -22,7 +22,7 @@ function Home() {
     }
 
     useEffect(() => {
-        setTimeout(IntroDisplayHandler, 1000)
+        setTimeout(IntroDisplayHandler, 5000)
         setSelectedImageFile(null)
     }, [])
 

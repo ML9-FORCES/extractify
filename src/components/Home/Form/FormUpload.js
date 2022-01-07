@@ -156,9 +156,9 @@ function FormUpload(props) {
                             <img id={styles.fileImage} src="#" alt="Preview" className={styles.hidden} />
                             <div id={styles.start}>
                                 <i className={`${styles.fa} ${styles.faDownload}`} aria-hidden="true"></i>
-                                <div>Select Image</div>
-                                <div id={styles.notimage} className={styles.hidden}>Please select an image</div>
-                                <span id={styles.fileUploadBtn} className={`${styles.btn} ${styles.btnPrimary}`}>Select image</span>
+                                <div>Select {props.option === 'pdf' ? 'PDF' : 'Image'}</div>
+                                <div id={styles.notimage} className={styles.hidden}>Please select {props.option === 'pdf' ? 'PDF' : 'Image'}</div>
+                                <span id={styles.fileUploadBtn} className={`${styles.btn} ${styles.btnPrimary}`}>Select {props.option === 'pdf' ? 'PDF' : 'Image'}</span>
                             </div>
                             <FormUploader
                                 id='imageUpload'
